@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #F3EFE7;
+  --color-cream-dark: #E8E2D6;
+  --color-studio-black: #111111;
+  --color-analog-brown: #3A221D;
+  --color-muted-gold: #C3A35C;
+  --color-vu-red: #B12A2A;
+
+  --font-headline: "Libre Baskerville", serif;
+  --font-body: "Inter", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-cream);
+  color: var(--color-studio-black);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: var(--color-muted-gold);
+  color: var(--color-studio-black);
+}
+
+.film-grain {
+  position: relative;
+}
+
+.film-grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
