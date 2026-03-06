@@ -1,26 +1,27 @@
+import { Routes, Route } from 'react-router-dom'
 import Navigation from './components/Navigation'
-import Hero from './components/Hero'
-import Works from './components/Works'
-import Discography from './components/Discography'
-import About from './components/About'
-import Press from './components/Press'
-import Contact from './components/Contact'
 import Footer from './components/Footer'
+import Home from './pages/Home'
+import Discography from './pages/Discography'
+import About from './pages/About'
+import Press from './pages/Press'
+import Contact from './pages/Contact'
 
 const App = () => {
   return (
-    <>
+    <div className="film-grain">
       <Navigation />
       <main>
-        <Hero />
-        <Works />
-        <Discography />
-        <About />
-        <Press />
-        <Contact />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/discography" element={<Discography />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/press" element={<Press />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
       </main>
       <Footer />
-    </>
+    </div>
   )
 }
 
