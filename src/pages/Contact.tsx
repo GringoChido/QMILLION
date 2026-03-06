@@ -1,13 +1,10 @@
 import { motion } from 'framer-motion'
-import { SpotifyIcon, AppleMusicIcon, InstagramIcon, XIcon, YouTubeIcon } from '../components/SocialIcons'
+import { SpotifyIcon, InstagramIcon } from '../components/SocialIcons'
 import SineWaveShader from '../components/SineWaveShader'
 
 const socialLinks = [
   { label: 'Spotify', href: 'https://open.spotify.com/playlist/5LIK4EECx6fCIkjQESBbop', Icon: SpotifyIcon },
-  { label: 'Apple Music', href: '#', Icon: AppleMusicIcon },
   { label: 'Instagram', href: 'https://instagram.com/qmillion1', Icon: InstagramIcon },
-  { label: 'X', href: '#', Icon: XIcon },
-  { label: 'YouTube', href: '#', Icon: YouTubeIcon },
 ]
 
 const Contact = () => {
@@ -16,8 +13,8 @@ const Contact = () => {
       {/* Left — Q Photo (55%) */}
       <div className="relative w-full md:w-[55%] h-[50vh] md:h-screen">
         <img
-          src="/images/142-qmillion-01_optimized.jpg"
-          alt="Q at the console"
+          src="/images/142-qmillion-02_optimized.jpg"
+          alt="Q in the studio"
           className="absolute inset-0 w-full h-full object-cover object-center"
         />
         <div

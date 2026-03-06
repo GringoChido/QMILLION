@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { SpotifyIcon, AppleMusicIcon, InstagramIcon, XIcon, YouTubeIcon } from './SocialIcons'
+import { SpotifyIcon, InstagramIcon } from './SocialIcons'
 
 const navLinks = [
   { label: 'Discography', to: '/discography' },
@@ -9,11 +9,8 @@ const navLinks = [
 ]
 
 const socialLinks = [
-  { label: 'Spotify', href: '#', Icon: SpotifyIcon },
-  { label: 'Apple Music', href: '#', Icon: AppleMusicIcon },
+  { label: 'Spotify', href: 'https://open.spotify.com/playlist/5LIK4EECx6fCIkjQESBbop', Icon: SpotifyIcon },
   { label: 'Instagram', href: 'https://instagram.com/qmillion1', Icon: InstagramIcon },
-  { label: 'X', href: '#', Icon: XIcon },
-  { label: 'YouTube', href: '#', Icon: YouTubeIcon },
 ]
 
 const Footer = () => {
@@ -55,7 +52,7 @@ const Footer = () => {
 
         {/* Copyright */}
         <p className="font-mono text-[10px] text-[#4a4035] tracking-[0.15em]">
-          &copy; Qmillion
+          &copy; {new Date().getFullYear()} Qmillion
         </p>
       </div>
     </footer>

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
-import { SpotifyIcon, AppleMusicIcon, InstagramIcon } from './SocialIcons'
+import { SpotifyIcon, InstagramIcon } from './SocialIcons'
 
 const navLinks = [
   { label: 'Discography', href: '/discography' },
@@ -12,8 +12,7 @@ const navLinks = [
 ]
 
 const socialLinks = [
-  { label: 'Spotify', href: '#', Icon: SpotifyIcon },
-  { label: 'Apple Music', href: '#', Icon: AppleMusicIcon },
+  { label: 'Spotify', href: 'https://open.spotify.com/playlist/5LIK4EECx6fCIkjQESBbop', Icon: SpotifyIcon },
   { label: 'Instagram', href: 'https://instagram.com/qmillion1', Icon: InstagramIcon },
 ]
 

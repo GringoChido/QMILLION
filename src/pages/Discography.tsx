@@ -91,7 +91,6 @@ const archiveCategories = [
   { title: 'Jazz & Soul', credits: archiveJazzSoul },
   { title: 'Hip Hop & R&B', credits: archiveHipHopRnb },
   { title: 'Dancehall & Afrobeat', credits: archiveDancehall },
-  { title: 'Film & Television', credits: [] as Credit[] },
 ]
 
 const CreditRow = ({ credit, index }: { credit: Credit; index: number }) => (

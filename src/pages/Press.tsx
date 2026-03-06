@@ -92,7 +92,7 @@ const Press = () => {
       <div className="section-divider" />
 
       {/* Features — pure typographic treatment */}
-      <section className="bg-textured pb-24 md:pb-32 px-6 md:px-10">
+      <section className="bg-textured pt-16 md:pt-20 pb-24 md:pb-32 px-6 md:px-10">
         <div className="max-w-[1400px] mx-auto">
           {features.map((feature, i) => (
             <motion.div
