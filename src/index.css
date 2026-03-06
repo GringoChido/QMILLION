@@ -108,9 +108,9 @@ body {
     radial-gradient(ellipse at 25% 60%, #161616 0%, var(--color-composing-bg) 75%);
 }
 
-/* Mobile: prevent horizontal overflow */
+/* Mobile: prevent horizontal overflow (clip instead of hidden to preserve position:fixed) */
 html, body {
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* Tap targets — ensure minimum 44px for interactive elements on touch */
