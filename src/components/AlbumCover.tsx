@@ -68,11 +68,11 @@ const AlbumCover = ({
   return (
     <div className={`relative overflow-hidden bg-base-alt ${className}`}>
       <img
-        src={url}
+        src={`${url}-500`}
         alt={`${album} cover art`}
         className="w-full h-full object-cover"
         onError={() => setFailed(true)}
-        loading="lazy"
+        decoding="async"
       />
       <div className={`absolute inset-0 bg-gradient-to-br ${tintGradients[tint]}`} />
     </div>
@@ -100,12 +100,13 @@ export const AlbumThumb = ({
 
   return (
     <img
-      src={url}
+      src={`${url}-250`}
       alt={album}
       className="rounded-sm object-cover flex-shrink-0"
       style={{ width: size, height: size }}
       onError={() => setFailed(true)}
       loading="lazy"
+      decoding="async"
     />
   )
 }

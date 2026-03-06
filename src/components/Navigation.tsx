@@ -98,7 +98,7 @@ const Navigation = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
-            className="fixed inset-0 bg-base flex flex-col justify-center px-8 md:hidden"
+            className="fixed inset-0 z-[55] bg-base flex flex-col justify-center px-8 md:hidden"
           >
             <ul className="space-y-4">
               {navLinks.map((link, i) => (
