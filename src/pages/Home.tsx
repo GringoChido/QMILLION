@@ -122,7 +122,7 @@ const Home = () => {
       {/* DISCIPLINE SECTIONS — each with unique shader background */}
       {disciplines.map((d, i) => (
         <div key={d.title}>
-          <section className={`${d.bg} relative overflow-hidden min-h-[70vh] py-[120px] px-6 md:px-10`}>
+          <section className={`${d.bg} relative overflow-hidden min-h-[50vh] md:min-h-[70vh] py-16 md:py-[120px] px-6 md:px-10`}>
             {/* Per-section shader backgrounds */}
             {d.title === 'MIXING' && (
               <div className="absolute inset-0 opacity-20">
@@ -156,10 +156,7 @@ const Home = () => {
                 <p className="text-amber text-xs tracking-[0.3em] uppercase mb-6">
                   {d.number}
                 </p>
-                <h2
-                  className="font-display text-cream tracking-wider leading-none"
-                  style={{ fontSize: '120px' }}
-                >
+                <h2 className="font-display text-[56px] md:text-[90px] lg:text-[120px] text-cream tracking-wider leading-none">
                   {d.title}
                 </h2>
                 <div

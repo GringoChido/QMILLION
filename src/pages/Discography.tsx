@@ -100,11 +100,11 @@ const CreditRow = ({ credit, index }: { credit: Credit; index: number }) => (
     whileInView={{ opacity: 1 }}
     viewport={{ once: true }}
     transition={{ duration: 0.5, delay: index * 0.03 }}
-    className="grid grid-cols-12 gap-2 py-3 border-b border-dark-rule/60 items-center group hover:border-amber/30 transition-colors duration-300"
+    className="flex items-center gap-3 py-3 border-b border-dark-rule/60 group hover:border-amber/30 transition-colors duration-300"
   >
-    <div className="col-span-5 md:col-span-4 flex items-center gap-3">
-      <AlbumThumb album={credit.album} size={40} />
-      <div className="flex items-center gap-2 min-w-0">
+    <AlbumThumb album={credit.album} size={40} />
+    <div className="flex-1 min-w-0">
+      <div className="flex items-center gap-2">
         {credit.grammy && (
           <span className="inline-block w-1.5 h-1.5 rounded-full bg-amber flex-shrink-0" />
         )}
@@ -112,14 +112,12 @@ const CreditRow = ({ credit, index }: { credit: Credit; index: number }) => (
           {credit.artist}
         </span>
       </div>
+      <span className="text-cream-muted text-sm italic truncate block">{credit.album}</span>
     </div>
-    <div className="col-span-4 md:col-span-4">
-      <span className="text-cream-muted text-sm italic truncate">{credit.album}</span>
-    </div>
-    <div className="col-span-2 md:col-span-3">
+    <div className="hidden md:block flex-shrink-0">
       <span className="text-amber/70 text-xs tracking-wider uppercase">{credit.role}</span>
     </div>
-    <div className="col-span-1 text-right">
+    <div className="flex-shrink-0 text-right">
       <span className="text-cream-muted/30 text-xs tabular-nums">{credit.year}</span>
     </div>
   </motion.div>
@@ -179,7 +177,7 @@ const Discography = () => {
             >
               <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
                 <div className="md:col-span-5">
-                  <div className="film-frame aspect-square max-w-[400px]">
+                  <div className="film-frame aspect-square max-w-[300px] md:max-w-[400px] mx-auto md:mx-0">
                     <AlbumCover
                       album={featured[0].album}
                       tint={featured[0].tint}
@@ -221,7 +219,7 @@ const Discography = () => {
                 >
                   <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
                     <div className={`md:col-span-4 ${isReversed ? 'md:order-2' : 'md:order-1'}`}>
-                      <div className="film-frame aspect-square max-w-[400px]">
+                      <div className="film-frame aspect-square max-w-[280px] md:max-w-[400px] mx-auto md:mx-0">
                         <AlbumCover
                           album={album.album}
                           tint={album.tint}
