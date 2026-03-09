@@ -1,6 +1,9 @@
+import { lazy, Suspense } from 'react'
 import { motion } from 'framer-motion'
 import DitheringCTA from '../components/DitheringCTA'
 import usePageMeta from '../hooks/usePageMeta'
+
+const AnimatedGradientBackground = lazy(() => import('../components/AnimatedGradientBackground'))
 
 const About = () => {
   usePageMeta({
@@ -43,8 +46,26 @@ const About = () => {
       </section>
 
       {/* The Statement */}
-      <section className="bg-textured-alt py-24 md:py-36 px-6 md:px-10">
-        <div className="max-w-[900px] mx-auto">
+      <section className="relative overflow-hidden py-24 md:py-36 px-6 md:px-10">
+        <Suspense fallback={<div className="absolute inset-0 bg-gradient-to-br from-[#1a1208] via-[#0a0804] to-base" />}>
+          <AnimatedGradientBackground
+            gradientColors={[
+              '#1a1510',
+              '#261a06',
+              '#3d2800',
+              '#261a06',
+              '#1a1208',
+              '#0a0804',
+            ]}
+            gradientStops={[0, 25, 45, 60, 80, 100]}
+            breathing
+            animationSpeed={0.015}
+            breathingRange={4}
+            startingGap={80}
+            topOffset={10}
+          />
+        </Suspense>
+        <div className="relative z-10 max-w-[900px] mx-auto">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
