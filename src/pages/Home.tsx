@@ -1,10 +1,17 @@
+import { lazy, Suspense } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import ScrollMarquee from '../components/ScrollMarquee'
-import WaveShader from '../components/WaveShader'
-import DigitalGlitch from '../components/DigitalGlitch'
-import PaperMeshBackground from '../components/PaperMeshBackground'
-import AuroraFlowShader from '../components/AuroraFlowShader'
+import usePageMeta from '../hooks/usePageMeta'
+
+const WaveShader = lazy(() => import('../components/WaveShader'))
+const DigitalGlitch = lazy(() => import('../components/DigitalGlitch'))
+const PaperMeshBackground = lazy(() => import('../components/PaperMeshBackground'))
+const AuroraFlowShader = lazy(() => import('../components/AuroraFlowShader'))
+
+const ShaderFallback = ({ gradient }: { gradient: string }) => (
+  <div className={`w-full h-full ${gradient}`} />
+)
 
 const pressPreview = [
   {
@@ -49,6 +56,11 @@ const disciplines = [
 ]
 
 const Home = () => {
+  usePageMeta({
+    description: 'Grammy Award winning producer, mixer, and composer. Work spanning jazz, hip hop, and soul with artists including Robert Glasper, Lalah Hathaway, and Esperanza Spalding.',
+    path: '/',
+  })
+
   return (
     <>
       {/* HERO — Full screen video */}
@@ -123,27 +135,32 @@ const Home = () => {
       {disciplines.map((d, i) => (
         <div key={d.title}>
           <section className={`${d.bg} relative overflow-hidden min-h-[50vh] md:min-h-[70vh] py-16 md:py-[120px] px-6 md:px-10`}>
-            {/* Per-section shader backgrounds */}
             {d.title === 'MIXING' && (
               <div className="absolute inset-0 opacity-20">
-                <DigitalGlitch
-                  baseColor="#e8960a"
-                  speed={0.12}
-                  glitchIntensity={0.25}
-                  rgbShift={0.004}
-                  scanlineDensity={900}
-                  scanlineOpacity={0.12}
-                />
+                <Suspense fallback={<ShaderFallback gradient="bg-gradient-to-b from-[#1a1208] to-base" />}>
+                  <DigitalGlitch
+                    baseColor="#e8960a"
+                    speed={0.12}
+                    glitchIntensity={0.25}
+                    rgbShift={0.004}
+                    scanlineDensity={900}
+                    scanlineOpacity={0.12}
+                  />
+                </Suspense>
               </div>
             )}
             {d.title === 'PRODUCING' && (
               <div className="absolute inset-0 opacity-30">
-                <PaperMeshBackground speed={0.3} />
+                <Suspense fallback={<ShaderFallback gradient="bg-gradient-to-br from-[#1a1a0f] via-base to-[#0f0a05]" />}>
+                  <PaperMeshBackground speed={0.3} />
+                </Suspense>
               </div>
             )}
             {d.title === 'COMPOSING' && (
               <div className="absolute inset-0 opacity-25">
-                <AuroraFlowShader amplitude={0.3} frequency={4.0} />
+                <Suspense fallback={<ShaderFallback gradient="bg-gradient-to-t from-base via-[#1a1208] to-[#1a1812]" />}>
+                  <AuroraFlowShader amplitude={0.3} frequency={4.0} />
+                </Suspense>
               </div>
             )}
             <div className="relative z-10 max-w-[1400px] mx-auto">
@@ -234,10 +251,12 @@ const Home = () => {
 
       <div className="section-divider" />
 
-      {/* FREQUENCIES — WebGL shader */}
+      {/* FREQUENCIES — WebGL shader + CTA */}
       <section className="relative overflow-hidden bg-textured-alt py-28 md:py-40 px-6 md:px-10">
         <div className="absolute inset-0 opacity-60">
-          <WaveShader />
+          <Suspense fallback={<ShaderFallback gradient="bg-gradient-to-br from-[#1a1208] via-base to-[#0f0a05]" />}>
+            <WaveShader />
+          </Suspense>
         </div>
         <div className="relative z-10 max-w-[1400px] mx-auto text-center">
           <motion.p
@@ -251,6 +270,21 @@ const Home = () => {
             <br />
             BEFORE THEY ARE UNDERSTOOD
           </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.5 }}
+            className="mt-12"
+          >
+            <Link
+              to="/contact"
+              className="inline-block text-amber text-xs tracking-[0.3em] uppercase border border-amber/20 px-8 py-4 hover:border-amber/40 hover:text-cream transition-all duration-300"
+            >
+              Work with Q &rarr;
+            </Link>
+          </motion.div>
         </div>
       </section>
     </>

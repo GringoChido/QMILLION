@@ -1,7 +1,11 @@
+import { lazy, Suspense } from 'react'
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import AlbumCover from '../components/AlbumCover'
 import { AlbumThumb } from '../components/AlbumCover'
-import DigitalAurora from '../components/DigitalAurora'
+import usePageMeta from '../hooks/usePageMeta'
+
+const DigitalAurora = lazy(() => import('../components/DigitalAurora'))
 
 interface Credit {
   artist: string
@@ -123,11 +127,19 @@ const CreditRow = ({ credit, index }: { credit: Credit; index: number }) => (
 )
 
 const Discography = () => {
+  usePageMeta({
+    title: 'Discography',
+    description: 'Grammy-winning discography spanning jazz, hip hop, R&B, Afrobeat, and dancehall. Featuring Robert Glasper, Esperanza Spalding, R+R=Now, and more.',
+    path: '/discography',
+  })
+
   return (
     <>
       {/* Page hero — Aurora shader background */}
       <section className="relative overflow-hidden pt-32 pb-16 md:pt-40 md:pb-20 px-6 md:px-10">
-        <DigitalAurora />
+        <Suspense fallback={<div className="absolute inset-0 bg-gradient-to-br from-[#1a1208] to-base" />}>
+          <DigitalAurora />
+        </Suspense>
         <div className="relative z-10 max-w-[1400px] mx-auto">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -305,6 +317,35 @@ const Discography = () => {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      <div className="section-divider" />
+
+      {/* CTA */}
+      <section className="bg-textured py-24 md:py-32 px-6 md:px-10">
+        <div className="max-w-[1400px] mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1 }}
+          >
+            <p className="text-amber text-xs tracking-[0.3em] uppercase mb-6">
+              Ready to Start?
+            </p>
+            <h2 className="font-display text-4xl md:text-6xl lg:text-7xl text-cream tracking-wider leading-none">
+              BRING Q TO
+              <br />
+              YOUR PROJECT
+            </h2>
+            <Link
+              to="/contact"
+              className="inline-block mt-10 text-amber text-xs tracking-[0.3em] uppercase border border-amber/20 px-8 py-4 hover:border-amber/40 hover:text-cream transition-all duration-300"
+            >
+              Get in Touch &rarr;
+            </Link>
+          </motion.div>
         </div>
       </section>
     </>

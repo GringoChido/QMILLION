@@ -1,7 +1,14 @@
 import { motion } from 'framer-motion'
 import DitheringCTA from '../components/DitheringCTA'
+import usePageMeta from '../hooks/usePageMeta'
 
 const About = () => {
+  usePageMeta({
+    title: 'About',
+    description: 'Thirty years at the board. Grammy Award-winning mixer, producer, and composer. From Kingston to Los Angeles — the sonic architect behind modern jazz and R&B.',
+    path: '/about',
+  })
+
   return (
     <>
       {/* Hero — full bleed Q photo */}

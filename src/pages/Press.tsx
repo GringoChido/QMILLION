@@ -1,5 +1,9 @@
+import { lazy, Suspense } from 'react'
 import { motion } from 'framer-motion'
-import FlowFieldBackground from '../components/FlowFieldBackground'
+import { Link } from 'react-router-dom'
+import usePageMeta from '../hooks/usePageMeta'
+
+const FlowFieldBackground = lazy(() => import('../components/FlowFieldBackground'))
 
 interface PressFeature {
   source: string
@@ -54,17 +58,25 @@ const features: PressFeature[] = [
 ]
 
 const Press = () => {
+  usePageMeta({
+    title: 'Press',
+    description: 'Features, interviews, and profiles on Qmillion from Sonic Scoop, Mix Magazine, Soundtoys, and Electronic Musician.',
+    path: '/press',
+  })
+
   return (
     <>
       {/* Hero — Flow field particle background */}
       <section className="relative overflow-hidden pt-32 pb-16 md:pt-40 md:pb-20 px-6 md:px-10">
         <div className="absolute inset-0 -z-10">
-          <FlowFieldBackground
+          <Suspense fallback={<div className="w-full h-full bg-gradient-to-br from-base via-[#1a1208] to-base" />}>
+            <FlowFieldBackground
             color="#e8960a"
             particleCount={400}
             speed={0.6}
             trailOpacity={0.08}
           />
+          </Suspense>
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-base via-base/40 to-base/30" />
         </div>
         <div className="relative z-10 max-w-[1400px] mx-auto">
@@ -141,6 +153,35 @@ const Press = () => {
               )}
             </motion.div>
           ))}
+        </div>
+      </section>
+
+      <div className="section-divider" />
+
+      {/* CTA */}
+      <section className="bg-textured-alt py-24 md:py-32 px-6 md:px-10">
+        <div className="max-w-[1400px] mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1 }}
+          >
+            <p className="text-amber text-xs tracking-[0.3em] uppercase mb-6">
+              Ready to Start?
+            </p>
+            <h2 className="font-display text-4xl md:text-6xl lg:text-7xl text-cream tracking-wider leading-none">
+              BRING Q TO
+              <br />
+              YOUR PROJECT
+            </h2>
+            <Link
+              to="/contact"
+              className="inline-block mt-10 text-amber text-xs tracking-[0.3em] uppercase border border-amber/20 px-8 py-4 hover:border-amber/40 hover:text-cream transition-all duration-300"
+            >
+              Get in Touch &rarr;
+            </Link>
+          </motion.div>
         </div>
       </section>
     </>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://qmillion.netlify.app/sitemap.xml

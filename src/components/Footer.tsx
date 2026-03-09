@@ -54,6 +54,18 @@ const Footer = () => {
         <p className="font-mono text-[10px] text-[#4a4035] tracking-[0.15em]">
           &copy; {new Date().getFullYear()} Qmillion
         </p>
+
+        <p className="font-mono text-[10px] text-[#4a4035]/60 tracking-[0.1em]">
+          Built by{' '}
+          <a
+            href="https://untold.works"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-amber transition-colors duration-300"
+          >
+            Untold.works
+          </a>
+        </p>
       </div>
     </footer>
   )

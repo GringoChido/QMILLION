@@ -29,8 +29,38 @@
 
     <!-- Theme color -->
     <meta name="theme-color" content="#111111" />
+
+    <!-- Analytics — activate when domain is configured -->
+    <script defer data-domain="qmillion.netlify.app" src="https://plausible.io/js/script.js"></script>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Qmillion",
+      "url": "https://qmillion.netlify.app",
+      "image": "https://qmillion.netlify.app/images/142-qmillion-01_optimized.jpg",
+      "description": "Grammy Award winning producer, mixer, and composer. Work spanning jazz, hip hop, and soul.",
+      "jobTitle": "Producer, Mixer, Composer",
+      "knowsAbout": ["Audio Mixing", "Music Production", "Film Scoring", "Sound Engineering"],
+      "award": "Grammy Award — Best R&B Album",
+      "sameAs": [
+        "https://open.spotify.com/playlist/5LIK4EECx6fCIkjQESBbop",
+        "https://instagram.com/qmillion1"
+      ]
+    }
+    </script>
   </head>
   <body>
+    <!-- Hidden form for Netlify Forms detection (SPA requires this in static HTML) -->
+    <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <select name="project"><option value="mixing"></option></select>
+      <textarea name="message"></textarea>
+    </form>
+
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
