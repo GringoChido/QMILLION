@@ -1,5 +1,5 @@
-import { lazy, Suspense } from 'react'
-import { motion } from 'framer-motion'
+import { lazy, Suspense, useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import AlbumCover from '../components/AlbumCover'
 import { AlbumThumb } from '../components/AlbumCover'
@@ -18,6 +18,7 @@ interface Credit {
 interface FeaturedAlbum extends Credit {
   note: string
   tint: 'amber' | 'green' | 'red'
+  spotifyId: string
 }
 
 const featured: FeaturedAlbum[] = [
@@ -29,6 +30,7 @@ const featured: FeaturedAlbum[] = [
     grammy: true,
     note: 'Grammy Award — Best R&B Album',
     tint: 'amber',
+    spotifyId: '1yqUCdbw73DpnHBVDwNa3X',
   },
   {
     artist: 'Robert Glasper Experiment',
@@ -38,6 +40,7 @@ const featured: FeaturedAlbum[] = [
     grammy: true,
     note: 'Grammy Nominated',
     tint: 'green',
+    spotifyId: '6GyMol4BayEpJZA7tFozqM',
   },
   {
     artist: 'R+R=Now',
@@ -46,6 +49,7 @@ const featured: FeaturedAlbum[] = [
     year: '2018',
     note: '#1 Billboard Jazz',
     tint: 'red',
+    spotifyId: '4odXFRfbmTNdyjiidyDgDb',
   },
   {
     artist: 'Seun Kuti',
@@ -54,6 +58,7 @@ const featured: FeaturedAlbum[] = [
     year: '2018',
     note: 'Afrobeat meets the future',
     tint: 'amber',
+    spotifyId: '4pu6BPHCFYrkNa55gyErSM',
   },
   {
     artist: 'Esperanza Spalding',
@@ -63,6 +68,7 @@ const featured: FeaturedAlbum[] = [
     grammy: true,
     note: 'Grammy Winner',
     tint: 'green',
+    spotifyId: '1aGm5Dz2FocgtXxKfrK0gn',
   },
 ]
 
@@ -103,9 +109,11 @@ const CreditRow = ({ credit, index }: { credit: Credit; index: number }) => (
     whileInView={{ opacity: 1 }}
     viewport={{ once: true }}
     transition={{ duration: 0.5, delay: index * 0.03 }}
-    className="flex items-center gap-3 py-3 border-b border-dark-rule/60 group hover:border-amber/30 transition-colors duration-300"
+    className="flex items-center gap-3 py-3 border-b border-dark-rule/60 group hover:border-amber/30 transition-all duration-300 hover:pl-1"
   >
-    <AlbumThumb album={credit.album} size={40} />
+    <div className="transition-transform duration-300 group-hover:scale-110">
+      <AlbumThumb album={credit.album} size={40} />
+    </div>
     <div className="flex-1 min-w-0">
       <div className="flex items-center gap-2">
         {credit.grammy && (
@@ -121,12 +129,19 @@ const CreditRow = ({ credit, index }: { credit: Credit; index: number }) => (
       <span className="text-amber/70 text-xs tracking-wider uppercase">{credit.role}</span>
     </div>
     <div className="flex-shrink-0 text-right">
-      <span className="text-cream-muted/30 text-xs tabular-nums">{credit.year}</span>
+      <span className="text-cream-muted/30 group-hover:text-cream-muted/60 text-xs tabular-nums transition-colors duration-300">{credit.year}</span>
     </div>
   </motion.div>
 )
 
+const genreTabs = [
+  { key: 'all', label: 'All' },
+  ...archiveCategories.map((c) => ({ key: c.title, label: c.title })),
+]
+
 const Discography = () => {
+  const [activeGenre, setActiveGenre] = useState('all')
+
   usePageMeta({
     title: 'Discography',
     description: 'Grammy-winning discography spanning jazz, hip hop, R&B, Afrobeat, and dancehall. Featuring Robert Glasper, Esperanza Spalding, R+R=Now, and more.',
@@ -145,7 +160,7 @@ const Discography = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2 }}
-            className="font-display text-[14vw] md:text-[11vw] leading-[0.85] text-cream tracking-wider"
+            className="font-display text-[clamp(3rem,11vw,13rem)] leading-[0.85] text-cream tracking-wider"
             style={{ textShadow: '0 2px 40px rgba(0,0,0,0.8), 0 0px 10px rgba(0,0,0,0.5)' }}
           >
             DISCOGRAPHY
@@ -210,6 +225,15 @@ const Discography = () => {
                   <p className="text-cream-muted/40 text-xs mt-2">
                     {featured[0].role} &middot; {featured[0].year}
                   </p>
+                  <iframe
+                    src={`https://open.spotify.com/embed/album/${featured[0].spotifyId}?utm_source=generator&theme=0`}
+                    width="100%"
+                    height="80"
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"
+                    className="rounded-lg mt-6 opacity-70 hover:opacity-100 transition-opacity duration-500"
+                    title={`Listen to ${featured[0].album}`}
+                  />
                 </div>
               </div>
             </motion.div>
@@ -255,6 +279,15 @@ const Discography = () => {
                       <p className="text-cream-muted/40 text-xs mt-2">
                         {album.role} &middot; {album.year}
                       </p>
+                      <iframe
+                        src={`https://open.spotify.com/embed/album/${album.spotifyId}?utm_source=generator&theme=0`}
+                        width="100%"
+                        height="80"
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                        loading="lazy"
+                        className="rounded-lg mt-6 opacity-70 hover:opacity-100 transition-opacity duration-500"
+                        title={`Listen to ${album.album}`}
+                      />
                     </div>
                   </div>
                   {i < featured.length - 2 && (
@@ -277,46 +310,56 @@ const Discography = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1 }}
-            className="text-amber text-xs tracking-[0.3em] uppercase mb-16"
+            className="text-amber text-xs tracking-[0.3em] uppercase mb-10"
           >
             Archive
           </motion.p>
 
-          <div className="space-y-20 md:space-y-28">
-            {archiveCategories.map((category) => (
-              <div key={category.title}>
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1 }}
-                  className="mb-8 pb-4 border-b border-amber-muted/20"
-                >
-                  <h2 className="font-display text-3xl md:text-4xl text-amber tracking-wider">
-                    {category.title}
-                  </h2>
-                </motion.div>
+          <div className="flex flex-wrap gap-2 mb-14">
+            {genreTabs.map((tab) => (
+              <button
+                key={tab.key}
+                onClick={() => setActiveGenre(tab.key)}
+                className={`text-[11px] tracking-[0.2em] uppercase px-4 py-2 border transition-all duration-300 ${
+                  activeGenre === tab.key
+                    ? 'border-amber text-amber'
+                    : 'border-dark-rule text-cream-muted/40 hover:border-amber/30 hover:text-cream-muted'
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
 
-                {category.credits.length > 0 ? (
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeGenre}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3 }}
+              className="space-y-20 md:space-y-28"
+            >
+              {(activeGenre === 'all'
+                ? archiveCategories
+                : archiveCategories.filter((c) => c.title === activeGenre)
+              ).map((category) => (
+                <div key={category.title}>
+                  <div className="mb-8 pb-4 border-b border-amber-muted/20">
+                    <h2 className="font-display text-3xl md:text-4xl text-amber tracking-wider">
+                      {category.title}
+                    </h2>
+                  </div>
+
                   <div>
                     {category.credits.map((credit, i) => (
                       <CreditRow key={credit.album} credit={credit} index={i} />
                     ))}
                   </div>
-                ) : (
-                  <motion.p
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1 }}
-                    className="text-cream-muted/40 text-sm italic"
-                  >
-                    Credits forthcoming
-                  </motion.p>
-                )}
-              </div>
-            ))}
-          </div>
+                </div>
+              ))}
+            </motion.div>
+          </AnimatePresence>
         </div>
       </section>
 

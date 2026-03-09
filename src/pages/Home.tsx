@@ -92,7 +92,7 @@ const Home = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.5, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="font-display text-[16vw] md:text-[12vw] leading-[0.85] text-cream tracking-wider"
+            className="font-display text-[clamp(3.5rem,12vw,12rem)] leading-[0.85] text-cream tracking-wider"
           >
             QMILLION
           </motion.h1>
@@ -115,11 +115,22 @@ const Home = () => {
         >
           <div className="h-px bg-dark-rule" />
           <div className="flex justify-center py-4">
-            <motion.div
-              animate={{ y: [0, 6, 0] }}
-              transition={{ repeat: Infinity, duration: 3, ease: 'easeInOut' }}
-              className="w-px h-8 bg-amber-muted/40"
-            />
+            <div className="flex items-end gap-[2px]">
+              {[10, 16, 22, 16, 10].map((h, i) => (
+                <motion.div
+                  key={i}
+                  animate={{ scaleY: [0.35, 1, 0.35] }}
+                  transition={{
+                    repeat: Infinity,
+                    duration: 2.5,
+                    delay: i * 0.15,
+                    ease: 'easeInOut',
+                  }}
+                  className="w-px origin-bottom bg-amber-muted/40"
+                  style={{ height: h }}
+                />
+              ))}
+            </div>
           </div>
         </motion.div>
       </section>
@@ -173,7 +184,7 @@ const Home = () => {
                 <p className="text-amber text-xs tracking-[0.3em] uppercase mb-6">
                   {d.number}
                 </p>
-                <h2 className="font-display text-[56px] md:text-[90px] lg:text-[120px] text-cream tracking-wider leading-none">
+                <h2 className="font-display text-[clamp(3.5rem,12vw,7.5rem)] text-cream tracking-wider leading-none">
                   {d.title}
                 </h2>
                 <div
@@ -264,7 +275,7 @@ const Home = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 2 }}
-            className="font-display text-[8vw] md:text-[5vw] text-cream/80 tracking-widest leading-none"
+            className="font-display text-[clamp(1.75rem,5vw,4.5rem)] text-cream/80 tracking-widest leading-none"
           >
             THE FREQUENCIES HE MOVES ARE FELT
             <br />

@@ -84,7 +84,7 @@ const Press = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2 }}
-            className="font-display text-[16vw] md:text-[12vw] leading-[0.85] text-cream tracking-wider"
+            className="font-display text-[clamp(3rem,12vw,14rem)] leading-[0.85] text-cream tracking-wider"
             style={{ textShadow: '0 2px 40px rgba(0,0,0,0.8), 0 0 10px rgba(0,0,0,0.5)' }}
           >
             PRESS

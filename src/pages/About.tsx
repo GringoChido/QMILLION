@@ -34,7 +34,7 @@ const About = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, delay: 0.5 }}
-              className="font-display text-[14vw] md:text-[10vw] leading-[0.85] text-cream tracking-wider"
+              className="font-display text-[clamp(3rem,10vw,12rem)] leading-[0.85] text-cream tracking-wider"
             >
               QMILLION
             </motion.h1>

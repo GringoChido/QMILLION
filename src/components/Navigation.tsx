@@ -101,24 +101,37 @@ const Navigation = () => {
             transition={{ duration: 0.4 }}
             className="fixed inset-0 z-[55] bg-base flex flex-col justify-center px-8 md:hidden"
           >
-            <ul className="space-y-4">
+            <ul className="space-y-5">
               {navLinks.map((link, i) => (
                 <motion.li
                   key={link.href}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.08, duration: 0.5 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    delay: 0.1 + i * 0.1,
+                    duration: 0.7,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
                 >
                   <Link
                     to={link.href}
-                    className="font-display text-5xl text-cream hover:text-amber transition-colors duration-300"
+                    className={`font-display text-5xl tracking-wide transition-colors duration-300 ${
+                      location.pathname === link.href
+                        ? 'text-amber'
+                        : 'text-cream hover:text-amber'
+                    }`}
                   >
                     {link.label}
                   </Link>
                 </motion.li>
               ))}
             </ul>
-            <div className="flex gap-6 mt-12 pt-8 border-t border-dark-rule">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.1 + navLinks.length * 0.1 + 0.15, duration: 0.8 }}
+              className="flex gap-6 mt-12 pt-8 border-t border-dark-rule"
+            >
               {socialLinks.map((link) => (
                 <a
                   key={link.label}
@@ -131,7 +144,7 @@ const Navigation = () => {
                   <link.Icon size={24} />
                 </a>
               ))}
-            </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
