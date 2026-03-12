@@ -47,46 +47,29 @@ const Contact = () => {
   }
 
   return (
-    <section className="min-h-screen bg-base flex flex-col md:flex-row">
-      {/* Left — Q Photo (55%) */}
-      <div className="relative w-full md:w-[55%] h-[50vh] md:h-screen md:sticky md:top-0">
-        <img
-          src="/images/142-qmillion-02_optimized.jpg"
-          alt="Q in the studio"
-          className="absolute inset-0 w-full h-full object-cover object-center"
-        />
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            outline: '1px solid rgba(232,220,200,0.12)',
-            outlineOffset: '-12px',
-          }}
-        />
-        <div className="hidden md:block absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-base to-transparent" />
-        <div className="md:hidden absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-base to-transparent" />
-      </div>
+    <section className="relative min-h-screen bg-base overflow-hidden">
+      {/* Full-bleed video background */}
+      <video
+        key={isMobile ? 'contact-mobile' : 'contact-desktop'}
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover"
+      >
+        <source src={isMobile ? '/videos/QMILLION_CONTACT_CTA_MOBILE.mp4' : '/videos/QMILLION_CONTACT_CTA.mp4'} type="video/mp4" />
+      </video>
+      <div className="absolute inset-0 bg-black/70" />
 
-      {/* Right — Contact Form (45%) with sine wave shader */}
-      <div className="relative w-full md:w-[45%] md:min-h-screen overflow-hidden">
-        <video
-          key={isMobile ? 'contact-mobile' : 'contact-desktop'}
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-        >
-          <source src={isMobile ? '/videos/QMILLION_CONTACT_CTA_MOBILE.mp4' : '/videos/QMILLION_CONTACT_CTA.mp4'} type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-black/60" />
-
-        <div className="relative z-10 w-full px-8 md:px-16 lg:px-20 py-16 md:py-32">
+      {/* Content centered over video */}
+      <div className="relative z-10 min-h-screen flex items-center justify-center px-6 md:px-10 py-24 md:py-32">
+        <div className="w-full max-w-[540px]">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, delay: 0.3 }}
           >
-            <h1 className="font-display text-6xl md:text-7xl lg:text-[80px] text-cream tracking-wider leading-none">
+            <h1 className="font-display text-7xl md:text-8xl lg:text-[100px] text-cream tracking-wider leading-none drop-shadow-lg">
               WORK
               <br />
               WITH Q
@@ -94,7 +77,7 @@ const Contact = () => {
 
             <div className="w-12 h-px bg-amber mt-8 mb-6" />
 
-            <p className="text-cream-muted text-base tracking-wide">
+            <p className="text-cream text-lg tracking-wide drop-shadow-md">
               Taking select projects. Reach out.
             </p>
           </motion.div>
