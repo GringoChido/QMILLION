@@ -1,11 +1,17 @@
-import { lazy, Suspense } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import DitheringCTA from '../components/DitheringCTA'
 import usePageMeta from '../hooks/usePageMeta'
 
-const AnimatedGradientBackground = lazy(() => import('../components/AnimatedGradientBackground'))
-
 const About = () => {
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768)
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)')
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
   usePageMeta({
     title: 'About',
     description: 'Thirty years at the board. Grammy Award-winning mixer, producer, and composer. From Kingston to Los Angeles — the sonic architect behind modern jazz and R&B.',
@@ -45,26 +51,20 @@ const About = () => {
         </div>
       </section>
 
-      {/* The Statement */}
+      {/* The Statement — video background */}
       <section className="relative overflow-hidden py-24 md:py-32 px-6 md:px-10">
-        <Suspense fallback={<div className="absolute inset-0 bg-gradient-to-br from-[#1a1208] via-[#0a0804] to-base" />}>
-          <AnimatedGradientBackground
-            gradientColors={[
-              '#1a1510',
-              '#261a06',
-              '#3d2800',
-              '#261a06',
-              '#1a1208',
-              '#0a0804',
-            ]}
-            gradientStops={[0, 25, 45, 60, 80, 100]}
-            breathing
-            animationSpeed={0.015}
-            breathingRange={4}
-            startingGap={80}
-            topOffset={10}
-          />
-        </Suspense>
+        <video
+          key={isMobile ? 'about-mobile' : 'about-desktop'}
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+          ref={(el) => { if (el) el.playbackRate = 0.75 }}
+        >
+          <source src={isMobile ? '/videos/QMILLION_ABOUT_BG_MOBILE.mp4' : '/videos/QMILLION_ABOUT_BG.mp4'} type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-black/60" />
         <div className="relative z-10 max-w-[900px] mx-auto">
           <motion.p
             initial={{ opacity: 0, y: 20 }}

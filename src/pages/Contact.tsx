@@ -1,9 +1,7 @@
-import { useState, lazy, Suspense } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { SpotifyIcon, InstagramIcon } from '../components/SocialIcons'
 import usePageMeta from '../hooks/usePageMeta'
-
-const SineWaveShader = lazy(() => import('../components/SineWaveShader'))
 
 const socialLinks = [
   { label: 'Spotify', href: 'https://open.spotify.com/playlist/5LIK4EECx6fCIkjQESBbop', Icon: SpotifyIcon },
@@ -13,6 +11,14 @@ const socialLinks = [
 const Contact = () => {
   const [submitted, setSubmitted] = useState(false)
   const [submitting, setSubmitting] = useState(false)
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768)
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)')
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
 
   usePageMeta({
     title: 'Contact',
@@ -62,11 +68,17 @@ const Contact = () => {
 
       {/* Right — Contact Form (45%) with sine wave shader */}
       <div className="relative w-full md:w-[45%] md:min-h-screen overflow-hidden">
-        <div className="absolute inset-0 opacity-40">
-          <Suspense fallback={<div className="w-full h-full bg-gradient-to-br from-base via-[#1a1208] to-base" />}>
-            <SineWaveShader />
-          </Suspense>
-        </div>
+        <video
+          key={isMobile ? 'contact-mobile' : 'contact-desktop'}
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src={isMobile ? '/videos/QMILLION_CONTACT_CTA_MOBILE.mp4' : '/videos/QMILLION_CONTACT_CTA.mp4'} type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-black/60" />
 
         <div className="relative z-10 w-full px-8 md:px-16 lg:px-20 py-16 md:py-32">
           <motion.div
