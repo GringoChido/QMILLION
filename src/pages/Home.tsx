@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react'
+import { lazy, Suspense, useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import ScrollMarquee from '../components/ScrollMarquee'
@@ -61,11 +61,21 @@ const Home = () => {
     path: '/',
   })
 
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768)
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)')
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
+
   return (
     <>
       {/* HERO — Full screen video */}
       <section className="relative h-screen w-full overflow-hidden bg-textured">
         <video
+          key={isMobile ? 'mobile' : 'desktop'}
           autoPlay
           muted
           loop
@@ -73,7 +83,10 @@ const Home = () => {
           poster="/images/qmillion-1.jpg"
           className="absolute inset-0 w-full h-full object-cover object-center"
         >
-          <source src="/videos/Q_2.mp4" type="video/mp4" />
+          <source
+            src={isMobile ? '/videos/QMILLION_HOME_MOBILE.mp4' : '/videos/QMILLION_HOME_WEB.mp4'}
+            type="video/mp4"
+          />
         </video>
         <div className="absolute inset-0 bg-black/55" />
 
