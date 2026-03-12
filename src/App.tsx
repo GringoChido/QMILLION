@@ -17,9 +17,12 @@ const App = () => {
 
   return (
     <div className="film-grain">
+      <a href="#main-content" className="skip-to-content">
+        Skip to content
+      </a>
       <ScrollToTop />
       <Navigation />
-      <main>
+      <main id="main-content">
         <Suspense fallback={<div className="min-h-screen bg-base" />}>
           <Routes>
             <Route path="/" element={<Home />} />

@@ -191,7 +191,7 @@ const Home = () => {
                   className="mt-8 mb-8 max-w-[480px]"
                   style={{ height: '1px', background: 'rgba(200, 134, 10, 0.3)' }}
                 />
-                <p className="text-cream-muted text-sm leading-[1.8] max-w-[480px]">
+                <p className="text-cream-muted text-base leading-[1.8] max-w-[480px]">
                   {d.copy}
                 </p>
                 <Link

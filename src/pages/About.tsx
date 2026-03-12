@@ -46,7 +46,7 @@ const About = () => {
       </section>
 
       {/* The Statement */}
-      <section className="relative overflow-hidden py-24 md:py-36 px-6 md:px-10">
+      <section className="relative overflow-hidden py-24 md:py-32 px-6 md:px-10">
         <Suspense fallback={<div className="absolute inset-0 bg-gradient-to-br from-[#1a1208] via-[#0a0804] to-base" />}>
           <AnimatedGradientBackground
             gradientColors={[
@@ -101,7 +101,7 @@ const About = () => {
             viewport={{ once: true }}
             transition={{ duration: 1 }}
           >
-            <div className="space-y-6 text-cream-muted text-sm leading-relaxed">
+            <div className="space-y-6 text-cream-muted text-base leading-relaxed">
               <p>
                 Thirty years at the board. Thousands of sessions. A Grammy on
                 the shelf and a philosophy built on one principle: every

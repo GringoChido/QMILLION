@@ -78,6 +78,14 @@ const Navigation = () => {
                 </a>
               ))}
             </div>
+
+            {/* CTA */}
+            <Link
+              to="/contact"
+              className="text-xs tracking-[0.2em] uppercase text-amber border border-amber/30 px-5 py-2 hover:border-amber/50 hover:text-cream transition-all duration-300"
+            >
+              Work with Q
+            </Link>
           </div>
 
           {/* Mobile toggle */}
@@ -144,6 +152,21 @@ const Navigation = () => {
                   <link.Icon size={24} />
                 </a>
               ))}
+            </motion.div>
+
+            {/* Mobile CTA */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.1 + navLinks.length * 0.1 + 0.3, duration: 0.8 }}
+              className="mt-8"
+            >
+              <Link
+                to="/contact"
+                className="inline-block text-sm tracking-[0.2em] uppercase text-amber border border-amber/30 px-8 py-4 hover:border-amber/50 hover:text-cream transition-all duration-300"
+              >
+                Work with Q &rarr;
+              </Link>
             </motion.div>
           </motion.div>
         )}

@@ -82,7 +82,7 @@ const Contact = () => {
 
             <div className="w-12 h-px bg-amber mt-8 mb-6" />
 
-            <p className="text-cream-muted text-sm tracking-wide">
+            <p className="text-cream-muted text-base tracking-wide">
               Taking select projects. Reach out.
             </p>
           </motion.div>
@@ -131,7 +131,7 @@ const Contact = () => {
                     name="name"
                     required
                     autoComplete="name"
-                    className="w-full bg-transparent border-b border-cream/20 focus:border-amber text-cream text-sm pb-2 outline-none transition-colors duration-300"
+                    className="w-full bg-transparent border-b border-cream/20 focus:border-amber text-cream text-base pb-2 outline-none transition-colors duration-300 min-h-[48px]"
                   />
                 </div>
 
@@ -145,7 +145,7 @@ const Contact = () => {
                     name="email"
                     required
                     autoComplete="email"
-                    className="w-full bg-transparent border-b border-cream/20 focus:border-amber text-cream text-sm pb-2 outline-none transition-colors duration-300"
+                    className="w-full bg-transparent border-b border-cream/20 focus:border-amber text-cream text-base pb-2 outline-none transition-colors duration-300 min-h-[48px]"
                   />
                 </div>
 
@@ -156,7 +156,7 @@ const Contact = () => {
                   <select
                     id="project"
                     name="project"
-                    className="w-full bg-transparent border-b border-cream/20 focus:border-amber text-cream text-sm pb-2 outline-none transition-colors duration-300 cursor-pointer"
+                    className="w-full bg-transparent border-b border-cream/20 focus:border-amber text-cream text-base pb-2 outline-none transition-colors duration-300 cursor-pointer min-h-[48px]"
                   >
                     <option value="mixing" className="bg-base text-cream">Mixing</option>
                     <option value="producing" className="bg-base text-cream">Producing</option>
@@ -174,7 +174,7 @@ const Contact = () => {
                     name="message"
                     required
                     rows={4}
-                    className="w-full bg-transparent border-b border-cream/20 focus:border-amber text-cream text-sm pb-2 outline-none transition-colors duration-300 resize-none"
+                    className="w-full bg-transparent border-b border-cream/20 focus:border-amber text-cream text-base pb-2 outline-none transition-colors duration-300 resize-none"
                   />
                 </div>
 

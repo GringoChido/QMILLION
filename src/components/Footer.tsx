@@ -15,7 +15,7 @@ const socialLinks = [
 
 const Footer = () => {
   return (
-    <footer className="bg-base px-6 md:px-10 py-10">
+    <footer className="bg-base px-6 md:px-10 py-12">
       <div className="max-w-[1400px] mx-auto space-y-5">
         {/* Nav row */}
         <div className="flex flex-wrap gap-x-4 gap-y-2">
@@ -42,7 +42,7 @@ const Footer = () => {
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-amber hover:text-amber-bright transition-colors duration-300"
+              className="text-amber hover:text-cream transition-colors duration-300"
               aria-label={link.label}
             >
               <link.Icon size={20} />
@@ -51,11 +51,11 @@ const Footer = () => {
         </div>
 
         {/* Copyright */}
-        <p className="font-mono text-[10px] text-[#4a4035] tracking-[0.15em]">
+        <p className="font-mono text-[10px] text-muted tracking-[0.15em]">
           &copy; {new Date().getFullYear()} Qmillion
         </p>
 
-        <p className="font-mono text-[10px] text-[#4a4035]/60 tracking-[0.1em]">
+        <p className="font-mono text-[10px] text-muted/60 tracking-[0.1em]">
           Built by{' '}
           <a
             href="https://untold.works"

@@ -4,18 +4,18 @@
   --color-base: #111111;
   --color-base-alt: #0f0f0f;
   --color-amber: #e8960a;
-  --color-amber-bright: #e8960a;
   --color-amber-muted: #8a5c08;
   --color-green: #1a2f1a;
   --color-cream: #e8dcc8;
   --color-cream-muted: #d4cfc8;
   --color-red: #8B1A0A;
   --color-dark-rule: #222222;
+  --color-muted: #4a4035;
   --color-mixing-bg: #151515;
   --color-producing-bg: #0a1a0a;
   --color-composing-bg: #0e0e0e;
 
-  --font-display: "Bebas Neue", sans-serif;
+  --font-display: "Barlow Condensed", sans-serif;
   --font-mono: "IBM Plex Mono", monospace;
 }
 
@@ -29,9 +29,9 @@ body {
   color: var(--color-cream);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-weight: 300;
-  font-size: 14px;
-  line-height: 1.6;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.625;
 }
 
 ::selection {
@@ -120,6 +120,32 @@ html, body {
     display: inline-flex;
     align-items: center;
   }
+}
+
+/* Skip to content */
+.skip-to-content {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 10000;
+  padding: 0.75rem 1.5rem;
+  background: var(--color-amber);
+  color: var(--color-base);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+.skip-to-content:focus {
+  left: 0;
+}
+
+/* Focus states */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--color-amber);
+  outline-offset: 2px;
 }
 
 /* Hide scrollbar */
